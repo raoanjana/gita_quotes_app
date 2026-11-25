@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10F5461344390A9366D408D0 /* GitaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB42910C718BBF1C2F70CF0A /* GitaWidget.swift */; };
+		2B73007B0BE793E8EACC8059 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BEAFEF200054210A09E3F0 /* Theme.swift */; };
+		2EB47769A80DED798E6AC822 /* VerseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */; };
+		3DC0B6D0966DF1139EE80D5C /* GitaWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1B07359F04582CEE177D570F /* GitaWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4928B05F4DA402BC3DC0812B /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9EC24E787369132CA0398 /* Quotes.swift */; };
+		90AF70340C557B2E06BEFBDE /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9EC24E787369132CA0398 /* Quotes.swift */; };
+		97C47730578E1A3F70B63613 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4804DBF71DE7730FE10FBA0D /* Localizable.strings */; };
+		A4A043CDA305FA94A2C59425 /* VerseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */; };
+		C2B57BA48CB19C2EE1490CD6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4804DBF71DE7730FE10FBA0D /* Localizable.strings */; };
+		C5980EACACFB602EF8062022 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BEAFEF200054210A09E3F0 /* Theme.swift */; };
+		EB750E8E07E86C264C228722 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE840DB33EE4C724AF347A7 /* ContentView.swift */; };
+		FBF654C43B44CEB42EDD9E26 /* GitaQuotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C13EA36761E334BEC809A5D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2E0261776F80E4D188E32B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D978EBCECC3142A1BDC6156;
+			remoteInfo = GitaWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		162E5F9BBE64F02C377A7E58 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3DC0B6D0966DF1139EE80D5C /* GitaWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		02B9EC24E787369132CA0398 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
+		08A18B1CEE0B43164BB5D5D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1B07359F04582CEE177D570F /* GitaWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = GitaWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitaQuotesApp.swift; sourceTree = "<group>"; };
+		5325A77543ED73DBF8956448 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5DE840DB33EE4C724AF347A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC3D247536E573A2D501DE72 /* GitaQuotes.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitaQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseData.swift; sourceTree = "<group>"; };
+		C8C43C4D97A31A3B639C92B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D0BEAFEF200054210A09E3F0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EB42910C718BBF1C2F70CF0A /* GitaWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitaWidget.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0E3D5DF55FFA5875DCC9AF6B /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				EB42910C718BBF1C2F70CF0A /* GitaWidget.swift */,
+				C8C43C4D97A31A3B639C92B9 /* Info.plist */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		16B57A05A332504932EE1720 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5DE840DB33EE4C724AF347A7 /* ContentView.swift */,
+				24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */,
+				08A18B1CEE0B43164BB5D5D3 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		87FD663D27C8EAFE4DCD83B9 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				02B9EC24E787369132CA0398 /* Quotes.swift */,
+				D0BEAFEF200054210A09E3F0 /* Theme.swift */,
+				BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */,
+				984C732E83552FDF56F7130B /* Localization */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		95F68792DDE9DF07A24F28ED = {
+			isa = PBXGroup;
+			children = (
+				16B57A05A332504932EE1720 /* App */,
+				87FD663D27C8EAFE4DCD83B9 /* Shared */,
+				0E3D5DF55FFA5875DCC9AF6B /* Widget */,
+				9D40875371DE172B1C6F2C00 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		984C732E83552FDF56F7130B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				4804DBF71DE7730FE10FBA0D /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		9D40875371DE172B1C6F2C00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC3D247536E573A2D501DE72 /* GitaQuotes.app */,
+				1B07359F04582CEE177D570F /* GitaWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		16AA636E58B0A7422D309C28 /* GitaQuotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67666B5ECCFD55D6ECC6A1B0 /* Build configuration list for PBXNativeTarget "GitaQuotes" */;
+			buildPhases = (
+				BC1AC1798EC2C9D8F221DC7A /* Sources */,
+				551A8D90C474902789B9B0AA /* Resources */,
+				162E5F9BBE64F02C377A7E58 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C14CAF13DF426209507509AA /* PBXTargetDependency */,
+			);
+			name = GitaQuotes;
+			packageProductDependencies = (
+			);
+			productName = GitaQuotes;
+			productReference = AC3D247536E573A2D501DE72 /* GitaQuotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3D978EBCECC3142A1BDC6156 /* GitaWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D682F78250A0BCAAA0B0ED28 /* Build configuration list for PBXNativeTarget "GitaWidget" */;
+			buildPhases = (
+				AA594AC6D96E8549A46A31F8 /* Sources */,
+				2CA372B8E83AE3D0CF21A3DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GitaWidget;
+			packageProductDependencies = (
+			);
+			productName = GitaWidget;
+			productReference = 1B07359F04582CEE177D570F /* GitaWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2E0261776F80E4D188E32B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					16AA636E58B0A7422D309C28 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					3D978EBCECC3142A1BDC6156 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A765E2517438C0CE71B4C11A /* Build configuration list for PBXProject "GitaQuotes" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 95F68792DDE9DF07A24F28ED;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9D40875371DE172B1C6F2C00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16AA636E58B0A7422D309C28 /* GitaQuotes */,
+				3D978EBCECC3142A1BDC6156 /* GitaWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2CA372B8E83AE3D0CF21A3DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97C47730578E1A3F70B63613 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		551A8D90C474902789B9B0AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2B57BA48CB19C2EE1490CD6 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA594AC6D96E8549A46A31F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10F5461344390A9366D408D0 /* GitaWidget.swift in Sources */,
+				4928B05F4DA402BC3DC0812B /* Quotes.swift in Sources */,
+				C5980EACACFB602EF8062022 /* Theme.swift in Sources */,
+				A4A043CDA305FA94A2C59425 /* VerseData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC1AC1798EC2C9D8F221DC7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB750E8E07E86C264C228722 /* ContentView.swift in Sources */,
+				FBF654C43B44CEB42EDD9E26 /* GitaQuotesApp.swift in Sources */,
+				90AF70340C557B2E06BEFBDE /* Quotes.swift in Sources */,
+				2B73007B0BE793E8EACC8059 /* Theme.swift in Sources */,
+				2EB47769A80DED798E6AC822 /* VerseData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C14CAF13DF426209507509AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D978EBCECC3142A1BDC6156 /* GitaWidget */;
+			targetProxy = C13EA36761E334BEC809A5D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4804DBF71DE7730FE10FBA0D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5325A77543ED73DBF8956448 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2D9538F4D72BEDF5304B3059 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		7844035BCDD125B08048AA62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7EC2F0155F54A79EEEFBC723 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A0A8EF926FF56D75841C38A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D510309235CA469CBF50998B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FA90C6F31AB4B4433BD7FC5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		67666B5ECCFD55D6ECC6A1B0 /* Build configuration list for PBXNativeTarget "GitaQuotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA90C6F31AB4B4433BD7FC5E /* Debug */,
+				D510309235CA469CBF50998B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A765E2517438C0CE71B4C11A /* Build configuration list for PBXProject "GitaQuotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7844035BCDD125B08048AA62 /* Debug */,
+				7EC2F0155F54A79EEEFBC723 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D682F78250A0BCAAA0B0ED28 /* Build configuration list for PBXNativeTarget "GitaWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D9538F4D72BEDF5304B3059 /* Debug */,
+				A0A8EF926FF56D75841C38A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2E0261776F80E4D188E32B6 /* Project object */;
+}

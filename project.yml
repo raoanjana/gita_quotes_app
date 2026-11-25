@@ -1,0 +1,49 @@
+name: GitaQuotes
+options:
+  bundleIdPrefix: com.example.gitaquotes
+  developmentLanguage: en
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""          # set your Apple ID team in Xcode > Signing & Capabilities
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  GitaQuotes:
+    type: application
+    platform: iOS
+    sources: [App, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.gitaquotes
+        TARGETED_DEVICE_FAMILY: "1"
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Gita Quotes
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        CFBundleURLTypes:
+          - CFBundleURLName: com.example.gitaquotes
+            CFBundleURLSchemes: [gitaquotes]
+    dependencies:
+      - target: GitaWidget
+
+  GitaWidget:
+    type: app-extension
+    platform: iOS
+    sources: [Widget, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.gitaquotes.widget
+        TARGETED_DEVICE_FAMILY: "1"
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Gita Quotes
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gita Quotes — Preview</title>
+<style>
+  :root {
+    --saffron: rgb(245,140,41); --deep: rgb(204,77,20); --cream: rgb(255,247,230);
+    --grad: linear-gradient(135deg, var(--saffron), var(--deep));
+    --serif: "New York", ui-serif, Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1c1c1e; color: #eee; padding: 24px; }
+  header { text-align: center; margin-bottom: 20px; }
+  header p { color: #aaa; font-size: 14px; margin-top: 6px; }
+  .controls { display: flex; gap: 10px; justify-content: center; margin: 14px 0 24px; flex-wrap: wrap; }
+  .controls button { background: #333; color: #fff; border: 0; border-radius: 10px; padding: 8px 14px; font-size: 14px; cursor: pointer; }
+  .controls button:hover { background: #444; }
+  .controls span { align-self: center; font-size: 13px; color: #aaa; }
+  .phones { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
+  .phone-wrap { text-align: center; }
+  .phone-wrap h3 { font-size: 14px; color: #bbb; margin-bottom: 10px; font-weight: 600; }
+  .phone { width: 340px; height: 736px; border-radius: 52px; border: 10px solid #000; outline: 2px solid #444;
+           position: relative; overflow: hidden; }
+  .island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #000; border-radius: 20px; z-index: 5; }
+  .status { position: absolute; top: 14px; left: 30px; right: 30px; display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: #fff; z-index: 4; }
+
+  /* Home screen */
+  .home { background: radial-gradient(circle at 30% 20%, #3d4a7a, #121626 70%); height: 100%; padding: 58px 18px 0; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 0; justify-items: center; }
+  .widget { background: var(--grad); border-radius: 22px; color: var(--cream); padding: 14px; display: flex; flex-direction: column;
+            text-align: left; cursor: pointer; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,.35); transition: transform .15s; }
+  .widget:hover { transform: scale(1.02); }
+  .w-medium { grid-column: span 4; width: 100%; height: 144px; }
+  .w-small { grid-column: span 2; grid-row: span 2; width: 144px; height: 144px; }
+  .w-large { grid-column: span 4; width: 100%; height: 304px; }
+  .widget .verse { font-family: var(--serif); flex: 1; overflow: hidden; }
+  .widget .cite { font-size: 11px; font-weight: 600; opacity: .8; margin-top: 6px; }
+  .w-small .verse { font-size: 13px; line-height: 1.22; }
+  .w-medium .verse { font-size: 15px; line-height: 1.3; }
+  .w-large .verse { font-size: 20px; line-height: 1.35; }
+  .w-large .om { font-size: 28px; opacity: .85; margin-bottom: 8px; }
+  .icon { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .icon .sq { width: 58px; height: 58px; border-radius: 14px; }
+  .icon small { font-size: 11px; color: #fff; }
+  .dock { position: absolute; bottom: 14px; left: 12px; right: 12px; height: 86px; border-radius: 30px; background: rgba(255,255,255,.18);
+          backdrop-filter: blur(10px); display: flex; justify-content: space-around; align-items: center; }
+  .dock .sq { width: 58px; height: 58px; border-radius: 14px; }
+
+  /* Lock screen */
+  .lock { background: linear-gradient(180deg, #1d2b53, #7e4a8c 60%, #f2a65a); height: 100%; color: #fff; text-align: center; padding-top: 62px; }
+  .lock .date { font-size: 17px; font-weight: 600; opacity: .9; }
+  .lock .inline { font-size: 14px; opacity: .9; margin: 4px auto 0; width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lock .time { font-size: 88px; font-weight: 700; line-height: 1; margin: 4px 0 10px; letter-spacing: -2px; }
+  .rect { width: 200px; height: 84px; margin: 0 auto; text-align: left; background: rgba(255,255,255,.14); border-radius: 14px; padding: 6px 9px; cursor: pointer; overflow: hidden; }
+  .rect .verse { font-family: var(--serif); font-size: 13px; line-height: 1.2; height: 58px; overflow: hidden; }
+  .rect .cite { font-size: 10px; font-weight: 700; margin-top: 3px; }
+
+  /* App */
+  .app { background: var(--grad); height: 100%; color: var(--cream); display: flex; flex-direction: column; align-items: center; padding: 70px 30px 34px; text-align: center; }
+  .app .om { font-size: 42px; opacity: .9; }
+  .app .verse { font-family: var(--serif); font-size: 23px; line-height: 1.35; margin: auto 0 18px; }
+  .app .cite { font-size: 14px; font-weight: 600; opacity: .8; margin-bottom: auto; }
+  .app .row { display: flex; gap: 12px; margin-top: 24px; }
+  .btn { border: 0; border-radius: 12px; padding: 10px 14px; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .btn.primary { background: var(--cream); color: var(--deep); }
+  .btn.secondary { background: rgba(255,247,230,.22); color: var(--cream); }
+  .link { background: none; border: 0; color: var(--cream); opacity: .85; font-size: 13px; margin-top: 18px; cursor: pointer; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; height: 66%; overflow-y: auto; background: #f2f2f7; color: #000; border-radius: 22px 22px 0 0;
+           padding: 18px; text-align: left; transform: translateY(100%); transition: transform .3s; z-index: 6; }
+  .sheet.open { transform: none; }
+  .sheet h4 { text-align: center; font-size: 16px; margin-bottom: 14px; }
+  .sheet ol { background: #fff; border-radius: 12px; padding: 10px 14px 10px 32px; font-size: 14px; line-height: 1.4; }
+  .sheet li { padding: 6px 0; }
+  .sheet .close { position: absolute; top: 14px; right: 16px; border: 0; background: none; color: #007aff; font-size: 15px; cursor: pointer; }
+  .toast { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.75); color: #fff; padding: 8px 14px; border-radius: 10px; font-size: 13px; opacity: 0; transition: opacity .3s; }
+  .toast.show { opacity: 1; }
+  .verse { white-space: pre-line; }
+  .lock .inline .verse { white-space: nowrap; }
+  .sk { display: none; font-size: 12px; line-height: 1.35; opacity: .85; white-space: pre-line; margin-bottom: 6px; }
+  body.show-sk .sk { display: block; }
+  body.show-sk .w-large .om { display: none; }
+  .app .app-sk { font-size: 15px; margin: auto 0 0; }
+  body.show-sk .app .verse { margin-top: 14px; }
+  .app .trname { font-size: 12px; opacity: .75; margin-top: 4px; margin-bottom: auto; }
+  .app .cite { margin-bottom: 0; }
+  .app .verse.long { font-size: 18px; }
+  .controls select { background: #333; color: #fff; border: 0; border-radius: 10px; padding: 8px 10px; font-size: 14px; }
+  .chk { font-size: 14px; color: #ddd; align-self: center; cursor: pointer; }
+  .foot { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+  .foot .cite { margin-top: 0; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .explain-pill { font-size: 10px; font-weight: 600; background: rgba(255,247,230,.22); padding: 3px 8px; border-radius: 999px; white-space: nowrap; cursor: pointer; }
+  .explain-pill:hover { background: rgba(255,247,230,.35); }
+  .sheet.tall { height: 88%; overflow-y: auto; }
+  .ex-chapter { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--deep); text-transform: uppercase; margin-bottom: 10px; }
+  .ex-card { background: var(--grad); color: var(--cream); border-radius: 16px; padding: 14px; margin-bottom: 14px; }
+  .ex-card .sk { font-size: 12px; }
+  .ex-verse { font-family: var(--serif); font-size: 15px; line-height: 1.4; white-space: pre-line; }
+  .ex-cite { font-size: 11px; font-weight: 600; opacity: .8; margin-top: 8px; }
+  .ex-h { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .ex-body { font-size: 14px; line-height: 1.5; color: #222; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Gita Quotes — interactive preview</h1>
+  <p>A browser mock-up of the iOS app, using the same verses, translation and daily 4 am rotation as the Swift code. Every widget shows the same verse. Tap a widget to open that verse in the app.</p>
+</header>
+<div class="controls">
+  <button id="prev">◀ Previous day</button>
+  <button id="now">Now</button>
+  <button id="next">Next day ▶</button>
+  <span id="slotLabel"></span>
+  <label class="chk"><input type="checkbox" id="sk"> Show Sanskrit</label>
+</div>
+
+<div class="phones">
+  <div class="phone-wrap">
+    <h3>Home Screen</h3>
+    <div class="phone"><div class="island"></div><div class="status"><span class="clock">9:41</span><span>●●● ▮</span></div>
+      <div class="home">
+        <div class="grid">
+          <div class="widget w-medium" data-kind="medium"><div class="verse"></div><div class="foot"><div class="cite"></div><span class="explain-pill">📖 Explain</span></div></div>
+          <div class="widget w-small" data-kind="short"><div class="verse"></div><div class="cite"></div></div>
+          <div class="icon"><div class="sq" style="background:#34c759"></div><small>Messages</small></div>
+          <div class="icon"><div class="sq" style="background:#ff9500"></div><small>Photos</small></div>
+          <div class="icon"><div class="sq" style="background:#007aff"></div><small>Mail</small></div>
+          <div class="icon"><div class="sq" style="background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--cream)">ॐ</div><small>Gita Quotes</small></div>
+        </div>
+        <div class="dock"><div class="sq" style="background:#34c759"></div><div class="sq" style="background:#007aff"></div><div class="sq" style="background:#fff"></div><div class="sq" style="background:#ff2d55"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone-wrap">
+    <h3>Home Screen — large widget</h3>
+    <div class="phone"><div class="island"></div><div class="status"><span class="clock">9:41</span><span>●●● ▮</span></div>
+      <div class="home">
+        <div class="grid">
+          <div class="widget w-large" data-kind="any"><div class="om">ॐ</div><div class="sk"></div><div class="verse"></div><div class="foot"><div class="cite"></div><span class="explain-pill">📖 Explain this to me</span></div></div>
+          <div class="icon"><div class="sq" style="background:#5856d6"></div><small>Calendar</small></div>
+          <div class="icon"><div class="sq" style="background:#ff3b30"></div><small>Music</small></div>
+          <div class="icon"><div class="sq" style="background:#8e8e93"></div><small>Settings</small></div>
+          <div class="icon"><div class="sq" style="background:#30b0c7"></div><small>Weather</small></div>
+        </div>
+        <div class="dock"><div class="sq" style="background:#34c759"></div><div class="sq" style="background:#007aff"></div><div class="sq" style="background:#fff"></div><div class="sq" style="background:#ff2d55"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone-wrap">
+    <h3>Lock Screen</h3>
+    <div class="phone"><div class="island"></div>
+      <div class="lock">
+        <div class="date" id="lockDate"></div>
+        <div class="time clock">9:41</div>
+        <div class="rect" data-kind="lock"><div class="verse"></div><div class="cite"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone-wrap">
+    <h3>The app</h3>
+    <div class="phone" id="appPhone"><div class="island"></div><div class="status"><span class="clock">9:41</span><span>●●● ▮</span></div>
+      <div class="app">
+        <div class="om">ॐ</div>
+        <div class="sk app-sk" id="appSk"></div>
+        <div class="verse" id="appVerse"></div>
+        <div class="cite" id="appCite"></div><div class="trname" id="appTr"></div>
+        <button class="btn secondary" id="explainBtn" style="margin-top:22px">📖 Explain this to me</button>
+        <div class="row">
+          <button class="btn primary" id="another">⟳ Another verse</button>
+          <button class="btn secondary" id="share">⬆︎</button>
+        </div>
+        <button class="link" id="howto">How to add the widget</button>
+      </div>
+      <div class="toast" id="toast">Copied to clipboard</div>
+      <div class="sheet tall" id="exSheet">
+        <button class="close" id="closeEx">Done</button>
+        <h4 id="exTitle"></h4>
+        <div class="ex-chapter" id="exChapter"></div>
+        <div class="ex-card"><div class="sk" id="exSk"></div><div class="ex-verse" id="exVerse"></div><div class="ex-cite" id="exCite"></div></div>
+        <div class="ex-h">What&#39;s happening, and what it means</div>
+        <div class="ex-body" id="exBody"></div>
+      </div>
+      <div class="sheet" id="sheet">
+        <button class="close" id="closeSheet">Done</button>
+        <h4>Add to Home Screen</h4>
+        <ol>
+          <li>Touch and hold an empty spot on your Home Screen until the apps jiggle.</li>
+          <li>Tap Edit (or +) in the top corner, then Add Widget.</li>
+          <li>Search for “Gita Quotes”, choose a size, and tap Add Widget.</li>
+          <li>A new verse arrives every morning at 4 am. Tap the widget to open it here.</li>
+          <li>On medium and large widgets, tap “Explain this to me” for the backstory and meaning.</li>
+          <li><b>Lock Screen:</b> touch and hold the Lock Screen, tap Customize, tap the area below the clock, and pick Gita Quotes. It shows the same verse as your Home Screen; long verses appear as a short excerpt.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DAY_START_HOUR = 4;       // QuoteLibrary.dayStartHour
+const SHORT_POOL = 8;           // QuoteLibrary.shortPoolSize
+const MEDIUM_LIMIT = 200;       // QuoteLibrary.mediumTextLimit
+const LOCK_LIMIT = 95, LOCK_MIN = 4;   // QuoteLibrary.lockScreenTextLimit / lockScreenMinimumPool
+const NAMES = { swarupananda: 'Swami Swarupananda (1909)' };
+const LANG = {};   // Translation.language; all translations are English
+const SHORT_NAMES = { swarupananda: 'Swarupananda' };
+const CHAPTERS = { 2: 'The Yoga of Knowledge', 3: 'The Yoga of Action', 4: 'The Yoga of Knowledge and Renunciation of Action', 5: 'The Yoga of Renunciation', 6: 'The Yoga of Meditation', 7: 'The Yoga of Knowledge and Realisation', 8: 'The Imperishable Brahman', 9: 'The Royal Knowledge and Royal Secret', 10: 'Divine Glories', 11: 'The Vision of the Universal Form', 12: 'The Yoga of Devotion', 13: 'The Field and the Knower of the Field', 14: 'The Three Qualities of Nature', 15: 'The Supreme Person', 16: 'Divine and Demonic Natures', 17: 'The Three Kinds of Faith', 18: 'Liberation through Renunciation' };
+let DATA, tr = 'swarupananda', lockTr = 'swarupananda', offset = 0, appVerse = null;
+
+const len = s => [...s].length;
+const LIMIT = { lock: 95, short: 120, medium: 200 };   // QuoteLibrary.Limit
+
+// Same as QuoteLibrary.dayStart(for:): the most recent 4 am, local time.
+function dayStart(date) {
+  const d = new Date(date); d.setHours(DAY_START_HOUR, 0, 0, 0);
+  if (d > date) d.setDate(d.getDate() - 1);
+  return d;
+}
+// Same as QuoteLibrary.dayNumber(for:): the local date, counted in days since 1970.
+function dayNumber(date) {
+  const s = dayStart(date);
+  return Math.floor(Date.UTC(s.getFullYear(), s.getMonth(), s.getDate()) / 86400000);
+}
+// Same math as QuoteLibrary.verse(for:): one verse per day for every widget.
+function verseFor(date) {
+  const slot = BigInt(dayNumber(date));
+  const n = BigInt(DATA.ids.length);
+  const prod = BigInt.asIntN(64, slot * 2654435761n);
+  return DATA.ids[Number(((prod % n) + n) % n)];
+}
+// Same as Quote.trim(_:to:)
+function trim(s, limit) {
+  const head = [...s].slice(0, limit - 1).join('');
+  let r = -1; for (let i = head.length - 1; i >= 0; i--) if ('.;:!?'.includes(head[i])) { r = i; break; }
+  if (r > limit / 2) return head.slice(0, r + 1).replace(/[;:,]+$/, '') + ' …';
+  return head.split(' ').slice(0, -1).join(' ').replace(/[;:,]+$/, '') + ' …';
+}
+// Same as Quote.text(fitting:): full text, else the excerpt, else trimmed.
+function quote(id, t, fit) {
+  if (!DATA.translations[t][id]) t = 'swarupananda';
+  const full = DATA.translations[t][id];
+  let text = full;
+  if (LIMIT[fit] && len(full.replace(/\n/g, ' ')) > LIMIT[fit]) {
+    const ex = (DATA.short[t] || {})[id];
+    text = ex && len(ex) <= LIMIT[fit] ? ex : trim(full.replace(/\n/g, ' '), LIMIT[fit]);
+  }
+  return { id, t, text, sk: DATA.sanskrit[id] };
+}
+const cite = id => `Bhagavad Gita ${id}`;
+const flat = s => s.replace(/\n/g, ' ');
+
+function render() {
+  const date = new Date(Date.now()); date.setDate(date.getDate() + offset);
+  document.querySelectorAll('[data-kind]').forEach(el => {
+    const isLock = el.dataset.kind === 'lock';
+    const q = quote(verseFor(date), isLock ? lockTr : tr, el.dataset.kind);
+    el.dataset.tr = isLock ? lockTr : tr;
+    el.dataset.id = q.id;
+    const small = el.classList.contains('w-small') || el.classList.contains('rect') || el.classList.contains('inline');
+    el.querySelector('.verse').textContent = small ? flat(q.text) : q.text;
+    const sk = el.querySelector('.sk'); if (sk) sk.textContent = q.sk;
+    const c = el.querySelector('.cite');
+    if (c) c.textContent = small ? `BG ${q.id}` : `${cite(q.id)} · ${SHORT_NAMES[q.t]}`;
+  });
+  const t = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/i, '');
+  document.querySelectorAll('.clock').forEach(e => e.textContent = t);
+  document.getElementById('lockDate').textContent = date.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' });
+  document.getElementById('slotLabel').textContent = offset === 0 ? 'Showing: today' : `Showing: ${dayStart(date).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' })}`;
+  if (!appVerse) appVerse = verseFor(date);
+  renderApp();
+  fitText();
+}
+
+// Mimic SwiftUI's .minimumScaleFactor: shrink text until it fits its box.
+function fitText() {
+  document.querySelectorAll('.widget .verse, .rect .verse').forEach(el => {
+    el.style.fontSize = '';
+    const base = parseFloat(getComputedStyle(el).fontSize);
+    let size = base;
+    while (el.scrollHeight > el.clientHeight + 1 && size > base * 0.5) { size -= 0.5; el.style.fontSize = size + 'px'; }
+  });
+}
+
+function renderApp() {
+  let text = DATA.translations[tr][appVerse], shownTr = tr;
+  if (!text) { text = DATA.translations.swarupananda[appVerse]; shownTr = 'swarupananda'; }
+  const v = document.getElementById('appVerse');
+  v.textContent = text;
+  v.classList.toggle('long', len(text) > 220);
+  document.getElementById('appSk').textContent = DATA.sanskrit[appVerse];
+  document.getElementById('appCite').textContent = `— ${cite(appVerse)}`;
+  document.getElementById('appTr').textContent = NAMES[shownTr];
+}
+
+document.querySelectorAll('.widget, .rect').forEach(el => el.addEventListener('click', e => {
+  appVerse = el.dataset.id;
+  if (el.dataset.tr !== tr) { tr = el.dataset.tr; document.getElementById('tr').value = tr; render(); }
+  renderApp();
+  if (e.target.closest('.explain-pill')) openExplain();
+  const app = document.getElementById('appPhone');
+  app.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  app.animate([{ outlineColor: '#f58c29' }, { outlineColor: '#444' }], { duration: 900 });
+}));
+document.getElementById('another').onclick = () => {
+  const ids = DATA.ids;
+  let id; do { id = ids[Math.floor(Math.random() * ids.length)]; } while (id === appVerse);
+  appVerse = id; renderApp();
+};
+document.getElementById('share').onclick = async () => {
+  try { await navigator.clipboard.writeText(`“${document.getElementById('appVerse').textContent}”\n— ${cite(appVerse)} · ${SHORT_NAMES[tr]}`); } catch {}
+  const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1400);
+};
+function openExplain() {
+  let text = DATA.translations[tr][appVerse], shownTr = tr;
+  if (!text) { text = DATA.translations.swarupananda[appVerse]; shownTr = 'swarupananda'; }
+  const ch = appVerse.split('.')[0];
+  document.getElementById('exTitle').textContent = cite(appVerse);
+  document.getElementById('exChapter').textContent = `Chapter ${ch} · ${CHAPTERS[ch]}`;
+  document.getElementById('exSk').textContent = DATA.sanskrit[appVerse];
+  document.getElementById('exVerse').textContent = text;
+  document.getElementById('exCite').textContent = `— ${cite(appVerse)} · ${SHORT_NAMES[shownTr]}`;
+  document.getElementById('exBody').textContent = DATA.explanations[LANG[shownTr] || 'en'][appVerse];
+  document.getElementById('exSheet').classList.add('open');
+}
+document.getElementById('explainBtn').onclick = openExplain;
+document.getElementById('closeEx').onclick = () => document.getElementById('exSheet').classList.remove('open');
+document.getElementById('howto').onclick = () => document.getElementById('sheet').classList.add('open');
+document.getElementById('closeSheet').onclick = () => document.getElementById('sheet').classList.remove('open');
+document.getElementById('prev').onclick = () => { offset--; appVerse = null; render(); };
+document.getElementById('next').onclick = () => { offset++; appVerse = null; render(); };
+document.getElementById('now').onclick = () => { offset = 0; appVerse = null; render(); };
+document.getElementById('sk').onchange = e => { document.body.classList.toggle('show-sk', e.target.checked); fitText(); };
+
+fetch('verses.json').then(r => r.json()).then(d => { DATA = d; render(); });
+</script>
+</body>
+</html>
