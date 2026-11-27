@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Xcode per-user state and build output
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.dSYM/
+*.dSYM.zip
+
+# Server: build output, Python caches, and deploy settings
+# (samconfig.toml holds your cost-alert email; it's created by `sam deploy --guided`)
+server/.aws-sam/
+server/samconfig.toml
+__pycache__/
+*.pyc
+
+# Local tool settings
+.claude/

@@ -61,7 +61,7 @@ From this `server` folder:
 sam build && sam deploy --guided --profile gitaquotes
 ```
 
-Answer: stack name `gitaquotes-analytics`, your region, **AlertEmail** = where cost alerts go, accept the other defaults, and save the answers (later deploys are just `sam build && sam deploy --profile gitaquotes`). AWS will email you once to confirm the budget alert.
+Answer: stack name `gitaquotes-analytics`, your region, **AlertEmail** = where cost alerts go, accept the other defaults, and save the answers (later deploys are just `sam build && sam deploy --profile gitaquotes`). The answers go in `samconfig.toml`, which is kept out of git because it contains your email. AWS will email you once to confirm the budget alert.
 
 At the end it prints **EventsEndpoint**. Put that URL in `App/Info.plist` (and `project.yml`) as `AnalyticsEndpoint`, rebuild the app, and events start flowing. They appear in S3 within about 5 minutes (Firehose batches them).
 
