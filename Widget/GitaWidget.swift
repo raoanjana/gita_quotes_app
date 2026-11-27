@@ -85,7 +85,7 @@ struct GitaWidgetView: View {
             .widgetURL(q.deepLink)
         case .systemSmall:
             let q = entry.quote
-            homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.small), fontSize: 14, citation: q.shortCitation)
+            homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.small), fontSize: 14, citation: q.shortCitation, small: true)
         case .systemMedium:
             let q = entry.quote
             homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.medium), fontSize: 15, citation: q.attribution, explain: "Explain")
@@ -95,7 +95,7 @@ struct GitaWidgetView: View {
         }
     }
 
-    private func homeScreen(quote: Quote, text: String, fontSize: CGFloat, citation: String, large: Bool = false, explain: LocalizedStringKey? = nil) -> some View {
+    private func homeScreen(quote: Quote, text: String, fontSize: CGFloat, citation: String, small: Bool = false, large: Bool = false, explain: LocalizedStringKey? = nil) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             if large {
                 if entry.showSanskrit {
@@ -131,11 +131,21 @@ struct GitaWidgetView: View {
                             .background(Theme.cream.opacity(0.22), in: Capsule())
                             .foregroundStyle(Theme.cream)
                     }
+                } else if small {
+                    Spacer(minLength: 4)
+                    // The small widget allows only one tap target, so the whole
+                    // widget opens the explanation; this icon says so.
+                    Image(systemName: "text.book.closed")
+                        .font(.caption2.weight(.semibold))
+                        .padding(5)
+                        .background(Theme.cream.opacity(0.22), in: Circle())
+                        .foregroundStyle(Theme.cream)
+                        .accessibilityLabel("Explain this verse")
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .widgetURL(quote.deepLink)
+        .widgetURL(small ? quote.explainLink : quote.deepLink)
     }
 }
 

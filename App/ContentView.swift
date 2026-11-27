@@ -1,10 +1,15 @@
+import Combine
 import SwiftUI
 
 struct ContentView: View {
     @AppStorage("translation") private var translation: Translation = .swarupananda
     @AppStorage("showSanskrit") private var showSanskrit = false
+    @Environment(\.scenePhase) private var scenePhase
     // Opens on the same verse the widgets are showing right now.
-    @State private var verseID = QuoteLibrary.verse(for: .now).id
+    @State private var verseID = QuoteLibrary.verse(for: QuoteLibrary.now).id
+    // The verse-day on screen, so the app can move to the new verse at 4 am.
+    @State private var shownDay = QuoteLibrary.dayNumber(for: QuoteLibrary.now)
+    private let clock = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
     @State private var sheet: Sheet?
 
     private enum Sheet: String, Identifiable {
@@ -14,7 +19,7 @@ struct ContentView: View {
 
     private var quote: Quote {
         QuoteLibrary.quote(verseID: verseID, translation: translation)
-            ?? QuoteLibrary.quote(for: .now, translation: translation)
+            ?? QuoteLibrary.quote(for: QuoteLibrary.now, translation: translation)
     }
 
     var body: some View {
@@ -23,6 +28,16 @@ struct ContentView: View {
 
             VStack(spacing: 24) {
                 HStack {
+                    #if DEBUG
+                    if QuoteLibrary.isSimulatingTime {
+                        // Shows the pretend clock when testing with -SimulatedNow.
+                        TimelineView(.periodic(from: .now, by: 1)) { _ in
+                            Text(QuoteLibrary.now.formatted(.dateTime.weekday().day().month().hour().minute().second()))
+                                .font(.caption2.monospacedDigit())
+                                .foregroundStyle(Theme.cream)
+                        }
+                    }
+                    #endif
                     Spacer()
                     settingsMenu
                 }
@@ -91,6 +106,11 @@ struct ContentView: View {
             .padding(.horizontal, 28)
             .padding(.vertical, 12)
         }
+        // If the app stays open (or in memory) past 4 am, move to the new day's verse.
+        .onReceive(clock) { _ in showTodayIfNewDay() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { showTodayIfNewDay() }
+        }
         .onOpenURL { url in
             // gitaquotes://verse/2.47?t=arnold[&explain=1] — sent when the widget is tapped
             guard url.host == "verse" else { return }
@@ -125,6 +145,14 @@ struct ContentView: View {
         }
     }
 
+    private func showTodayIfNewDay() {
+        let now = QuoteLibrary.now
+        let today = QuoteLibrary.dayNumber(for: now)
+        guard today != shownDay else { return }
+        shownDay = today
+        withAnimation(.easeInOut) { verseID = QuoteLibrary.verse(for: now).id }
+    }
+
     private func randomVerseID() -> String {
         let ids = QuoteLibrary.verses.map(\.id)
         var next = verseID
@@ -143,7 +171,7 @@ private struct HowToSheet: View {
                     Label("Search for \u{201C}Gita Quotes\u{201D}, choose a size, and tap Add Widget.", systemImage: "magnifyingglass")
                     Label("To show the Sanskrit on the large widget, touch and hold it and choose Edit Widget.", systemImage: "book")
                     Label("A new verse arrives every morning at 4 am. Tap the widget to open it here.", systemImage: "clock.arrow.circlepath")
-                    Label("On medium and large widgets, tap \u{201C}Explain this to me\u{201D} to read the backstory and meaning.", systemImage: "text.book.closed")
+                    Label("On medium and large widgets, tap \u{201C}Explain\u{201D} to read the backstory and meaning. The small widget shows a book icon: tap anywhere on it for the explanation.", systemImage: "text.book.closed")
                 }
                 Section("Lock Screen") {
                     Label("Wake your iPhone, then touch and hold the Lock Screen and tap Customize.", systemImage: "lock")

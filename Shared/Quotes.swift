@@ -128,6 +128,32 @@ enum QuoteLibrary {
 
     static var verses: [Verse] { VerseData.verses }
 
+    /// The current time. For testing, a debug build of the app can be launched with
+    /// `-SimulatedNow "2026-11-25 03:59:40"` (local time) to pretend it is then; the
+    /// simulated clock keeps ticking from that moment. Release builds always use the real time.
+    static var now: Date {
+        #if DEBUG
+        if let simulatedOffset { return Date.now.addingTimeInterval(simulatedOffset) }
+        #endif
+        return Date.now
+    }
+
+    #if DEBUG
+    static let simulatedOffset: TimeInterval? = {
+        guard let text = UserDefaults.standard.string(forKey: "SimulatedNow") else { return nil }
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = .current
+        for format in ["yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm"] {
+            f.dateFormat = format
+            if let date = f.date(from: text) { return date.timeIntervalSinceNow }
+        }
+        return nil
+    }()
+
+    static var isSimulatingTime: Bool { simulatedOffset != nil }
+    #endif
+
     /// The verse for a given moment. It doesn't depend on translation or widget
     /// size, so the Home Screen, the Lock Screen and the app always agree.
     static func verse(for date: Date) -> Verse {
