@@ -4,11 +4,14 @@ import SwiftUI
 struct ContentView: View {
     @AppStorage("translation") private var translation: Translation = .swarupananda
     @AppStorage("showSanskrit") private var showSanskrit = false
+    @AppStorage(Analytics.enabledKey) private var shareUsage = true
     @Environment(\.scenePhase) private var scenePhase
     // Opens on the same verse the widgets are showing right now.
     @State private var verseID = QuoteLibrary.verse(for: QuoteLibrary.now).id
     // The verse-day on screen, so the app can move to the new verse at 4 am.
     @State private var shownDay = QuoteLibrary.dayNumber(for: QuoteLibrary.now)
+    // Set when the app goes to the background, so the next return counts as an open.
+    @State private var wasInBackground = false
     private let clock = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
     @State private var sheet: Sheet?
 
@@ -75,6 +78,7 @@ struct ContentView: View {
 
                 Button {
                     sheet = .explain
+                    Analytics.shared.log("explanation_open", verseID: verseID, source: "in_app")
                 } label: {
                     Label("Explain this to me", systemImage: "text.book.closed")
                         .font(.subheadline.weight(.semibold))
@@ -85,6 +89,7 @@ struct ContentView: View {
                 HStack(spacing: 16) {
                     Button {
                         withAnimation(.easeInOut) { verseID = randomVerseID() }
+                        Analytics.shared.log("verse_view", verseID: verseID, source: "in_app", props: ["reason": "another"])
                     } label: {
                         Label("Another verse", systemImage: "arrow.triangle.2.circlepath")
                     }
@@ -95,6 +100,9 @@ struct ContentView: View {
                     ShareLink(item: "\u{201C}\(quote.text)\u{201D}\n— \(quote.attribution)") {
                         Image(systemName: "square.and.arrow.up")
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        Analytics.shared.log("share_tap", verseID: verseID, source: "in_app", props: ["what": "verse"])
+                    })
                     .buttonStyle(.bordered)
                     .tint(Theme.cream)
                 }
@@ -107,9 +115,33 @@ struct ContentView: View {
             .padding(.vertical, 12)
         }
         // If the app stays open (or in memory) past 4 am, move to the new day's verse.
-        .onReceive(clock) { _ in showTodayIfNewDay() }
+        // The same tick sends any queued usage events, so they leave within seconds.
+        .onReceive(clock) { _ in
+            showTodayIfNewDay()
+            Analytics.shared.flush()
+        }
         .onChange(of: scenePhase) { _, phase in
-            if phase == .active { showTodayIfNewDay() }
+            if phase == .background { wasInBackground = true }
+            if phase == .active {
+                showTodayIfNewDay()
+                // Count an open when coming back from the background; the first launch is counted in onAppear.
+                if wasInBackground {
+                    wasInBackground = false
+                    Analytics.shared.log("app_open")
+                }
+            }
+            if phase == .active || phase == .background { Analytics.shared.flush() }
+        }
+        .onAppear {
+            Analytics.shared.log("app_open")
+            Analytics.shared.log("verse_view", verseID: verseID, props: ["reason": "daily"])
+            Analytics.shared.flush()
+        }
+        .onChange(of: showSanskrit) { _, on in
+            Analytics.shared.log("sanskrit_toggle", props: ["on": on ? "true" : "false"])
+        }
+        .onChange(of: shareUsage) { _, on in
+            if !on { Analytics.shared.discardQueued() }
         }
         .onOpenURL { url in
             // gitaquotes://verse/2.47?t=arnold[&explain=1] — sent when the widget is tapped
@@ -120,7 +152,12 @@ struct ContentView: View {
                 translation = tr
             }
             verseID = url.lastPathComponent
-            sheet = items.contains(where: { $0.name == "explain" }) ? .explain : nil
+            let explain = items.contains(where: { $0.name == "explain" })
+            sheet = explain ? .explain : nil
+            let source = items.first(where: { $0.name == "src" })?.value
+            Analytics.shared.log("widget_tap", verseID: verseID, source: source)
+            Analytics.shared.log("verse_view", verseID: verseID, source: source, props: ["reason": "widget"])
+            if explain { Analytics.shared.log("explanation_open", verseID: verseID, source: source) }
         }
         .sheet(item: $sheet) { which in
             switch which {
@@ -134,6 +171,7 @@ struct ContentView: View {
     private var settingsMenu: some View {
         Menu {
             Toggle("Show Sanskrit", isOn: $showSanskrit)
+            Toggle("Share anonymous usage data", isOn: $shareUsage)
             Button("About this translation") { sheet = .about }
         } label: {
             Label(translation.shortTitle, systemImage: "book")
@@ -151,6 +189,7 @@ struct ContentView: View {
         guard today != shownDay else { return }
         shownDay = today
         withAnimation(.easeInOut) { verseID = QuoteLibrary.verse(for: now).id }
+        Analytics.shared.log("verse_view", verseID: verseID, props: ["reason": "daily"])
     }
 
     private func randomVerseID() -> String {
@@ -228,6 +267,9 @@ private struct ExplanationSheet: View {
                     ShareLink(item: "\u{201C}\(quote.text)\u{201D}\n— \(quote.attribution)\n\n\(quote.explanation)") {
                         Label("Share verse and explanation", systemImage: "square.and.arrow.up")
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        Analytics.shared.log("share_tap", verseID: quote.verse.id, source: "in_app", props: ["what": "verse_and_explanation"])
+                    })
                     .font(.subheadline)
                     .tint(Theme.deepSaffron)
                 }
@@ -256,6 +298,11 @@ private struct AboutSheet: View {
                 }
                 Section {
                     Text("Sanskrit text from the gita/gita project (public domain). Verse numbers follow the standard numbering.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                Section("Privacy") {
+                    Text("If \u{201C}Share anonymous usage data\u{201D} is on, the app sends which verses you view, when you open explanations or share, which widgets you tap, and a short technical summary if the app crashes or freezes. It uses a random ID made on this phone and never your name, email, contacts or location. You can turn it off in the menu at any time.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }

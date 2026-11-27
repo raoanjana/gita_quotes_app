@@ -18,6 +18,8 @@
 		C2B57BA48CB19C2EE1490CD6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4804DBF71DE7730FE10FBA0D /* Localizable.strings */; };
 		C5980EACACFB602EF8062022 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BEAFEF200054210A09E3F0 /* Theme.swift */; };
 		EB750E8E07E86C264C228722 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE840DB33EE4C724AF347A7 /* ContentView.swift */; };
+		B3768A3ED146FC003405EDE2 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63921D35E81C14C7747732 /* Analytics.swift */; };
+		D25CC4D35910075426927BD2 /* CrashReports.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC30664286C0BFD4D369DCE /* CrashReports.swift */; };
 		FBF654C43B44CEB42EDD9E26 /* GitaQuotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitaQuotesApp.swift; sourceTree = "<group>"; };
 		5325A77543ED73DBF8956448 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5DE840DB33EE4C724AF347A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BF63921D35E81C14C7747732 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		FFC30664286C0BFD4D369DCE /* CrashReports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReports.swift; sourceTree = "<group>"; };
 		AC3D247536E573A2D501DE72 /* GitaQuotes.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitaQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseData.swift; sourceTree = "<group>"; };
 		C8C43C4D97A31A3B639C92B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 		16B57A05A332504932EE1720 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				BF63921D35E81C14C7747732 /* Analytics.swift */,
+				FFC30664286C0BFD4D369DCE /* CrashReports.swift */,
 				5DE840DB33EE4C724AF347A7 /* ContentView.swift */,
 				24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */,
 				08A18B1CEE0B43164BB5D5D3 /* Info.plist */,
@@ -232,6 +238,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3768A3ED146FC003405EDE2 /* Analytics.swift in Sources */,
+				D25CC4D35910075426927BD2 /* CrashReports.swift in Sources */,
 				EB750E8E07E86C264C228722 /* ContentView.swift in Sources */,
 				FBF654C43B44CEB42EDD9E26 /* GitaQuotesApp.swift in Sources */,
 				90AF70340C557B2E06BEFBDE /* Quotes.swift in Sources */,

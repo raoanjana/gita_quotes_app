@@ -1,0 +1,220 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Gita Quotes analytics. The app posts anonymous usage events to an HTTPS endpoint;
+  a Lambda function validates them and Firehose writes them to S3, one folder per day.
+  Athena queries them in place. No personal data and no IP addresses are stored.
+
+Parameters:
+  AlertEmail:
+    Type: String
+    Description: Email address for the monthly cost alert.
+  MonthlyBudgetUSD:
+    Type: Number
+    Default: 10
+    Description: Send an alert when the month's AWS bill is forecast to pass this amount.
+  EventRetentionDays:
+    Type: Number
+    Default: 730
+    Description: Delete raw events after this many days.
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Architectures: [arm64]
+    MemorySize: 128
+    Timeout: 10
+
+Resources:
+  # --- Storage -------------------------------------------------------------
+
+  EventsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: { SSEAlgorithm: AES256 }
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireOldEvents
+            Status: Enabled
+            ExpirationInDays: !Ref EventRetentionDays
+
+  QueryResultsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: { SSEAlgorithm: AES256 }
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireQueryResults
+            Status: Enabled
+            ExpirationInDays: 30
+
+  # --- Firehose: buffers events and writes gzipped JSON lines to S3 ---------
+
+  FirehoseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { Service: firehose.amazonaws.com }
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: WriteEvents
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: [s3:PutObject, s3:AbortMultipartUpload, s3:GetBucketLocation, s3:ListBucket, s3:ListBucketMultipartUploads]
+                Resource:
+                  - !GetAtt EventsBucket.Arn
+                  - !Sub "${EventsBucket.Arn}/*"
+
+  EventsStream:
+    Type: AWS::KinesisFirehose::DeliveryStream
+    Properties:
+      DeliveryStreamType: DirectPut
+      ExtendedS3DestinationConfiguration:
+        BucketARN: !GetAtt EventsBucket.Arn
+        RoleARN: !GetAtt FirehoseRole.Arn
+        Prefix: "events/dt=!{timestamp:yyyy-MM-dd}/"
+        ErrorOutputPrefix: "errors/!{firehose:error-output-type}/dt=!{timestamp:yyyy-MM-dd}/"
+        CompressionFormat: GZIP
+        BufferingHints:
+          IntervalInSeconds: 300
+          SizeInMBs: 5
+
+  # --- API and function ----------------------------------------------------
+
+  EventsApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      DefaultRouteSettings:
+        ThrottlingRateLimit: 20     # requests per second, across all users
+        ThrottlingBurstLimit: 50
+
+  EventsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/events/
+      Handler: app.handler
+      Environment:
+        Variables:
+          STREAM_NAME: !Ref EventsStream
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: firehose:PutRecordBatch
+              Resource: !GetAtt EventsStream.Arn
+      Events:
+        PostEvents:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref EventsApi
+            Path: /v1/events
+            Method: POST
+
+  EventsFunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${EventsFunction}"
+      RetentionInDays: 30
+
+  # --- Athena: query the events with SQL ----------------------------------
+
+  AnalyticsDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: gitaquotes_analytics
+
+  EventsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref AnalyticsDatabase
+      TableInput:
+        Name: events
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: json
+          projection.enabled: "true"
+          projection.dt.type: date
+          projection.dt.format: yyyy-MM-dd
+          projection.dt.range: "2026-01-01,NOW"
+          projection.dt.interval: "1"
+          projection.dt.interval.unit: DAYS
+          storage.location.template: !Sub "s3://${EventsBucket}/events/dt=${!dt}/"
+        PartitionKeys:
+          - { Name: dt, Type: string }
+        StorageDescriptor:
+          Location: !Sub "s3://${EventsBucket}/events/"
+          InputFormat: org.apache.hadoop.mapred.TextInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.openx.data.jsonserde.JsonSerDe
+          Columns:
+            - { Name: received_at, Type: string }
+            - { Name: event_time, Type: string }
+            - { Name: install_id, Type: string }
+            - { Name: app_version, Type: string }
+            - { Name: os_version, Type: string }
+            - { Name: name, Type: string }
+            - { Name: verse_id, Type: string }
+            - { Name: source, Type: string }
+            - { Name: props, Type: "map<string,string>" }
+
+  AnalyticsWorkGroup:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: gitaquotes
+      State: ENABLED
+      WorkGroupConfiguration:
+        EnforceWorkGroupConfiguration: true
+        BytesScannedCutoffPerQuery: 1073741824   # 1 GB per query, a cost guard
+        ResultConfiguration:
+          OutputLocation: !Sub "s3://${QueryResultsBucket}/"
+
+  # --- Cost alert ----------------------------------------------------------
+
+  MonthlyBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: gitaquotes-monthly
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit: { Amount: !Ref MonthlyBudgetUSD, Unit: USD }
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: FORECASTED
+            ComparisonOperator: GREATER_THAN
+            Threshold: 100
+          Subscribers:
+            - { SubscriptionType: EMAIL, Address: !Ref AlertEmail }
+
+Outputs:
+  EventsEndpoint:
+    Description: Put this in the app's Info.plist as AnalyticsEndpoint.
+    Value: !Sub "https://${EventsApi}.execute-api.${AWS::Region}.amazonaws.com/v1/events"
+  EventsBucketName:
+    Value: !Ref EventsBucket
+  AthenaWorkGroup:
+    Value: !Ref AnalyticsWorkGroup

@@ -25,6 +25,9 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Gita Quotes
+        AnalyticsEndpoint: "https://apq2eytk3e.execute-api.us-east-1.amazonaws.com/v1/events"   # EventsEndpoint output of server/ (gitaquotes-analytics stack)
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         CFBundleURLTypes:

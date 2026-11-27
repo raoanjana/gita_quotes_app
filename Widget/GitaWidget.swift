@@ -82,20 +82,20 @@ struct GitaWidgetView: View {
                     .widgetAccentable()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .widgetURL(q.deepLink)
+            .widgetURL(q.deepLink(source: "lock_screen"))
         case .systemSmall:
             let q = entry.quote
-            homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.small), fontSize: 14, citation: q.shortCitation, small: true)
+            homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.small), fontSize: 14, citation: q.shortCitation, source: "widget_small", small: true)
         case .systemMedium:
             let q = entry.quote
-            homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.medium), fontSize: 15, citation: q.attribution, explain: "Explain")
+            homeScreen(quote: q, text: q.text(fitting: QuoteLibrary.Limit.medium), fontSize: 15, citation: q.attribution, source: "widget_medium", explain: "Explain")
         default:
             let q = entry.quote
-            homeScreen(quote: q, text: q.text, fontSize: 19, citation: q.attribution, large: true, explain: "Explain this to me")
+            homeScreen(quote: q, text: q.text, fontSize: 19, citation: q.attribution, source: "widget_large", large: true, explain: "Explain this to me")
         }
     }
 
-    private func homeScreen(quote: Quote, text: String, fontSize: CGFloat, citation: String, small: Bool = false, large: Bool = false, explain: LocalizedStringKey? = nil) -> some View {
+    private func homeScreen(quote: Quote, text: String, fontSize: CGFloat, citation: String, source: String, small: Bool = false, large: Bool = false, explain: LocalizedStringKey? = nil) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             if large {
                 if entry.showSanskrit {
@@ -122,7 +122,7 @@ struct GitaWidgetView: View {
                 if let explain {
                     Spacer(minLength: 4)
                     // Medium and large widgets can have a second tap target.
-                    Link(destination: quote.explainLink) {
+                    Link(destination: quote.explainLink(source: source)) {
                         Label(explain, systemImage: "text.book.closed")
                             .font(.caption2.weight(.semibold))
                             .lineLimit(1)
@@ -145,7 +145,7 @@ struct GitaWidgetView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .widgetURL(small ? quote.explainLink : quote.deepLink)
+        .widgetURL(small ? quote.explainLink(source: source) : quote.deepLink(source: source))
     }
 }
 

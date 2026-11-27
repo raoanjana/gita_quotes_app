@@ -1,0 +1,14 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "gitaquotes-analytics"
+resolve_s3 = true
+capabilities = ["CAPABILITY_IAM"]
+confirm_changeset = false
+fail_on_empty_changeset = false
+
+[default.deploy.parameters.parameter_overrides]
+AlertEmail = "rao.anjana94@gmail.com"
+
+[default.global.parameters]
+region = "us-east-1"
