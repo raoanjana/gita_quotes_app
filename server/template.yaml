@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Gita Quotes analytics. The app posts anonymous usage events to an HTTPS endpoint;
+  Hindu Wisdom analytics. The app posts anonymous usage events to an HTTPS endpoint;
   a Lambda function validates them and Firehose writes them to S3, one folder per day.
   Athena queries them in place. No personal data and no IP addresses are stored.
 

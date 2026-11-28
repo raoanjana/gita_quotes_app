@@ -1,6 +1,6 @@
 name: GitaQuotes
 options:
-  bundleIdPrefix: com.example.gitaquotes
+  bundleIdPrefix: com.anjanarao.hinduwisdom
   developmentLanguage: en
   deploymentTarget:
     iOS: "17.0"
@@ -19,20 +19,20 @@ targets:
     sources: [App, Shared]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.gitaquotes
+        PRODUCT_BUNDLE_IDENTIFIER: com.anjanarao.hinduwisdom
         TARGETED_DEVICE_FAMILY: "1"
     info:
       path: App/Info.plist
       properties:
-        CFBundleDisplayName: Gita Quotes
+        CFBundleDisplayName: Hindu Wisdom
         AnalyticsEndpoint: "https://apq2eytk3e.execute-api.us-east-1.amazonaws.com/v1/events"   # EventsEndpoint output of server/ (gitaquotes-analytics stack)
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         CFBundleURLTypes:
-          - CFBundleURLName: com.example.gitaquotes
-            CFBundleURLSchemes: [gitaquotes]
+          - CFBundleURLName: com.anjanarao.hinduwisdom
+            CFBundleURLSchemes: [hinduwisdom]
     dependencies:
       - target: GitaWidget
 
@@ -42,11 +42,11 @@ targets:
     sources: [Widget, Shared]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.gitaquotes.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.anjanarao.hinduwisdom.widget
         TARGETED_DEVICE_FAMILY: "1"
     info:
       path: Widget/Info.plist
       properties:
-        CFBundleDisplayName: Gita Quotes
+        CFBundleDisplayName: Hindu Wisdom
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

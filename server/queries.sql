@@ -1,4 +1,4 @@
--- Gita Quotes analytics: example Athena queries.
+-- Hindu Wisdom analytics: example Athena queries.
 -- Run in the Athena console with workgroup "gitaquotes" and database "gitaquotes_analytics".
 -- Always filter on dt (the event date, YYYY-MM-DD): it limits how much data is scanned, and so the cost.
 

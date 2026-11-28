@@ -4,7 +4,7 @@ It runs the real events function (src/events/app.py), but instead of Firehose it
 accepted events in memory. Point a debug build of the app at it:
 
     python3 server/tools/local_server.py                # listens on http://localhost:8787
-    xcrun simctl launch booted com.example.gitaquotes -AnalyticsEndpoint http://localhost:8787/v1/events
+    xcrun simctl launch booted com.anjanarao.hinduwisdom -AnalyticsEndpoint http://localhost:8787/v1/events
 
 Open http://localhost:8787 to see what has arrived.
 """
@@ -56,7 +56,7 @@ class Handler(BaseHTTPRequestHandler):
                                  ("event_time", "name", "verse_id", "source")) +
                 "<td>%s</td></tr>" % html.escape(json.dumps(e.get("props") or {}))
                 for e in reversed(RECEIVED))
-            data = ("<!DOCTYPE html><meta charset=utf-8><title>Gita Quotes local events</title>"
+            data = ("<!DOCTYPE html><meta charset=utf-8><title>Hindu Wisdom local events</title>"
                     "<style>body{font:14px -apple-system,sans-serif;margin:24px}td,th{padding:4px 10px;"
                     "border-bottom:1px solid #eee;text-align:left}</style>"
                     "<h2>Events received: %d</h2><p>Newest first. Reload to update.</p>"
@@ -74,5 +74,5 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8787"))
-    print("Gita Quotes local events server on http://localhost:%d" % port, flush=True)
+    print("Hindu Wisdom local events server on http://localhost:%d" % port, flush=True)
     ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()

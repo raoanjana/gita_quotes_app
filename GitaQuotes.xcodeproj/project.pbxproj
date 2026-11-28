@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A29A2E99AE0E0CFB4A40379 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 949D77ABF6066043A2FDE5FE /* PrivacyInfo.xcprivacy */; };
+		7099C061D99D02104CBF5ACB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1E434452F65F8A1792D47078 /* PrivacyInfo.xcprivacy */; };
 		10F5461344390A9366D408D0 /* GitaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB42910C718BBF1C2F70CF0A /* GitaWidget.swift */; };
 		2B73007B0BE793E8EACC8059 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BEAFEF200054210A09E3F0 /* Theme.swift */; };
 		2EB47769A80DED798E6AC822 /* VerseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */; };
@@ -55,12 +57,14 @@
 		5325A77543ED73DBF8956448 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5DE840DB33EE4C724AF347A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BF63921D35E81C14C7747732 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		1E434452F65F8A1792D47078 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		FFC30664286C0BFD4D369DCE /* CrashReports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReports.swift; sourceTree = "<group>"; };
 		AC3D247536E573A2D501DE72 /* GitaQuotes.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitaQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA5F830EB49CB6C0E737BD2 /* VerseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseData.swift; sourceTree = "<group>"; };
 		C8C43C4D97A31A3B639C92B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D0BEAFEF200054210A09E3F0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EB42910C718BBF1C2F70CF0A /* GitaWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitaWidget.swift; sourceTree = "<group>"; };
+		949D77ABF6066043A2FDE5FE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -68,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				EB42910C718BBF1C2F70CF0A /* GitaWidget.swift */,
+				949D77ABF6066043A2FDE5FE /* PrivacyInfo.xcprivacy */,
 				C8C43C4D97A31A3B639C92B9 /* Info.plist */,
 			);
 			path = Widget;
@@ -77,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				BF63921D35E81C14C7747732 /* Analytics.swift */,
+				1E434452F65F8A1792D47078 /* PrivacyInfo.xcprivacy */,
 				FFC30664286C0BFD4D369DCE /* CrashReports.swift */,
 				5DE840DB33EE4C724AF347A7 /* ContentView.swift */,
 				24801A3EF7854D82C2FEB72F /* GitaQuotesApp.swift */,
@@ -208,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A29A2E99AE0E0CFB4A40379 /* PrivacyInfo.xcprivacy in Resources */,
 				97C47730578E1A3F70B63613 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7099C061D99D02104CBF5ACB /* PrivacyInfo.xcprivacy in Resources */,
 				C2B57BA48CB19C2EE1490CD6 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,7 +287,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjanarao.hinduwisdom.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -421,7 +429,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjanarao.hinduwisdom.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -437,7 +445,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjanarao.hinduwisdom;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -453,7 +461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.gitaquotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anjanarao.hinduwisdom;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

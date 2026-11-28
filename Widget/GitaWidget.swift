@@ -5,7 +5,7 @@ import AppIntents
 // MARK: - Configuration (long-press the widget → Edit Widget)
 
 struct GitaWidgetIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Gita Quotes"
+    static var title: LocalizedStringResource = "Hindu Wisdom"
     static var description = IntentDescription("Choose whether the large widget shows the Sanskrit.")
 
     @Parameter(title: "Show Sanskrit (large widget)", default: false)
@@ -157,7 +157,7 @@ struct GitaWidget: Widget {
             GitaWidgetView(entry: entry)
                 .containerBackground(for: .widget) { Theme.background }
         }
-        .configurationDisplayName("Gita Quotes")
+        .configurationDisplayName("Hindu Wisdom")
         .description("A new verse from the Bhagavad Gita every morning. On the large size, Edit Widget can add the Sanskrit.")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
@@ -169,7 +169,7 @@ struct GitaLockScreenWidget: Widget {
             GitaWidgetView(entry: entry)
                 .containerBackground(for: .widget) { Color.clear }
         }
-        .configurationDisplayName("Gita Quotes")
+        .configurationDisplayName("Hindu Wisdom")
         .description("The same verse as your Home Screen widgets, in a short form that fits the Lock Screen.")
         // Below the clock only; no one-line version above the time.
         .supportedFamilies([.accessoryRectangular])

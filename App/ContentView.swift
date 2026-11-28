@@ -144,7 +144,7 @@ struct ContentView: View {
             if !on { Analytics.shared.discardQueued() }
         }
         .onOpenURL { url in
-            // gitaquotes://verse/2.47?t=arnold[&explain=1] — sent when the widget is tapped
+            // hinduwisdom://verse/2.47?t=swarupananda[&explain=1]&src=widget_small — sent when a widget is tapped
             guard url.host == "verse" else { return }
             let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
             if let t = items.first(where: { $0.name == "t" })?.value,
@@ -207,7 +207,7 @@ private struct HowToSheet: View {
                 Section("Home Screen") {
                     Label("Touch and hold an empty spot on your Home Screen until the apps jiggle.", systemImage: "hand.tap")
                     Label("Tap Edit (or +) in the top corner, then Add Widget.", systemImage: "plus.circle")
-                    Label("Search for \u{201C}Gita Quotes\u{201D}, choose a size, and tap Add Widget.", systemImage: "magnifyingglass")
+                    Label("Search for \u{201C}Hindu Wisdom\u{201D}, choose a size, and tap Add Widget.", systemImage: "magnifyingglass")
                     Label("To show the Sanskrit on the large widget, touch and hold it and choose Edit Widget.", systemImage: "book")
                     Label("A new verse arrives every morning at 4 am. Tap the widget to open it here.", systemImage: "clock.arrow.circlepath")
                     Label("On medium and large widgets, tap \u{201C}Explain\u{201D} to read the backstory and meaning. The small widget shows a book icon: tap anywhere on it for the explanation.", systemImage: "text.book.closed")
@@ -215,7 +215,7 @@ private struct HowToSheet: View {
                 Section("Lock Screen") {
                     Label("Wake your iPhone, then touch and hold the Lock Screen and tap Customize.", systemImage: "lock")
                     Label("Choose Lock Screen, then tap the widget area below the clock.", systemImage: "rectangle.on.rectangle")
-                    Label("Pick \u{201C}Gita Quotes\u{201D} and tap Done.", systemImage: "checkmark.circle")
+                    Label("Pick \u{201C}Hindu Wisdom\u{201D} and tap Done.", systemImage: "checkmark.circle")
                     Label("It shows the same verse as your Home Screen widgets. Long verses appear as a short excerpt; tap to read the whole verse.", systemImage: "book")
                 }
             }

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-/// Anonymous usage analytics, sent to the Gita Quotes server (see server/).
+/// Anonymous usage analytics, sent to the Hindu Wisdom server (see server/).
 ///
 /// Events carry a random install ID made on first launch and nothing that identifies
 /// a person. They queue on the device and are sent in batches when the app opens or

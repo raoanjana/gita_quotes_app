@@ -1,4 +1,4 @@
-"""Receives anonymous usage events from the Gita Quotes app and passes them to Firehose.
+"""Receives anonymous usage events from the Hindu Wisdom app and passes them to Firehose.
 
 Request: POST /v1/events with a JSON body:
     {

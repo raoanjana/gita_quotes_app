@@ -1,4 +1,4 @@
-# Gita Quotes server
+# Hindu Wisdom server
 
 Anonymous usage analytics for the app, on AWS.
 
@@ -88,7 +88,7 @@ MetricKit doesn't deliver reports for builds run from Xcode; to check the pipeli
 
 ```bash
 python3 server/tools/local_server.py
-xcrun simctl launch --terminate-running-process booted com.example.gitaquotes -AnalyticsEndpoint http://localhost:8787/v1/events
+xcrun simctl launch --terminate-running-process booted com.anjanarao.hinduwisdom -AnalyticsEndpoint http://localhost:8787/v1/events
 ```
 
 Use the app in the Simulator, then open http://localhost:8787 to see the events that arrived.
@@ -96,5 +96,5 @@ Use the app in the Simulator, then open http://localhost:8787 to see the events 
 ## Before App Store release
 
 - Add a privacy policy URL in App Store Connect, saying what's collected (above) and that it's anonymous.
-- App Privacy answers: *Usage Data → Product Interaction* and *Diagnostics → Crash Data, Performance Data*, all **not** linked to identity and **not** used for tracking. No App Tracking Transparency prompt is needed.
+- App Privacy answers (these match `App/PrivacyInfo.xcprivacy`; keep the two in step): *Usage Data → Product Interaction*, *Identifiers → Device ID* (the random install ID), and *Diagnostics → Crash Data, Performance Data*. All **not** linked to the user's identity and **not** used for tracking. No App Tracking Transparency prompt is needed.
 - Downloads, installs by country, and where installs came from are in App Store Connect → *Analytics*; this server only sees phones that open the app.

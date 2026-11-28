@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Gita Quotes</string>
+	<string>Hindu Wisdom</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,10 +24,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.example.gitaquotes</string>
+			<string>com.anjanarao.hinduwisdom</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>gitaquotes</string>
+				<string>hinduwisdom</string>
 			</array>
 		</dict>
 	</array>

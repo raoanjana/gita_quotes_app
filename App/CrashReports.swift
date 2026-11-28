@@ -1,7 +1,7 @@
 import Foundation
 import MetricKit
 
-/// Crash and hang reports from MetricKit, forwarded to the Gita Quotes server.
+/// Crash and hang reports from MetricKit, forwarded to the Hindu Wisdom server.
 ///
 /// iOS collects a report when the app crashes or freezes and hands it to the app the
 /// next time it opens (sometimes up to a day later). Each report becomes one `crash` or

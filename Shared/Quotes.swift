@@ -104,12 +104,12 @@ struct Quote: Identifiable, Hashable {
 
     /// Opens the app on this verse. `source` says which widget was tapped, for analytics.
     func deepLink(source: String) -> URL {
-        URL(string: "gitaquotes://verse/\(verse.id)?t=\(translation.rawValue)&src=\(source)")!
+        URL(string: "hinduwisdom://verse/\(verse.id)?t=\(translation.rawValue)&src=\(source)")!
     }
 
     /// Opens the app straight to this verse's explanation.
     func explainLink(source: String) -> URL {
-        URL(string: "gitaquotes://verse/\(verse.id)?t=\(translation.rawValue)&explain=1&src=\(source)")!
+        URL(string: "hinduwisdom://verse/\(verse.id)?t=\(translation.rawValue)&explain=1&src=\(source)")!
     }
 }
 
